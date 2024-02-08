@@ -108,3 +108,6 @@ simulate_survey_data <- data.frame(
   outcome_list
 )
 head(simulate_survey_data)
+
+# write simulation onto csv for testing
+write_csv(survey_sim, here::here("inputs/data/simulate_survey_data.csv"))
