@@ -1,7 +1,7 @@
 #### Preamble ####
 # Purpose: Simulating data on survery results 
 # Authors: Jerry Lu, YuChen Chen, Che-Yu Wang 
-# Email: Jerry33692@gmail.com, Victorchen.chen@mail.utoronto.ca  
+# Email: Jerry33692@gmail.com, Victorchen.chen@mail.utoronto.ca, Cheyu.wang@mail.Toronto.ca
 # License: MIT
 # Pre-requisites: none
 
@@ -15,6 +15,7 @@ set.seed(100)
 
 #Participant values analysed in connection with survey results
 age <- sample(x = 1:95, size = 200, replace = TRUE)
+wave <- sample(c(1,3), size = 100, replace = TRUE)
 age_group <- sample(c('10-20', '20-30', '30-40', '40-50', '50-60', '60 and older'), size = 100, replace = TRUE)
 gender <- sample(c('Male','Female'), size = 200, replace = TRUE)
 state <- sample(c('State 1','State 2', 'State 3', 'State 4'), size = 200, replace = TRUE)
