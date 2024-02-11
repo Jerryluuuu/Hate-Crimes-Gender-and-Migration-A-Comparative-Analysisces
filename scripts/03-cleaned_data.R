@@ -14,7 +14,7 @@ library(janitor)
 survey <- read_csv(here::here("inputs/data/survey.csv"), show_col_types = FALSE)
 
 #limiting the data to just 4th wave surveys, subsetting to only columns used in analysis and renaming columns 
-Cleaned_survey <- survey[(survey$wave == 3 | survey$wave == 1), ] |>
+Cleaned_survey <- survey[(survey$wave == 4 | survey$wave == 2), ] |>
   subset(select = -c(res_id, east, singdivsep, refugee_ind, women_role, list, treatment_list)) |>
   dplyr::rename(only_means = hate_violence_means,
                 message = hate_pol_message,
@@ -32,4 +32,4 @@ Cleaned_survey <- survey[(survey$wave == 3 | survey$wave == 1), ] |>
   )
 
 #writing to csv
-write_csv(Cleaned_survey, here::here("inputs/data/Clean_survey.csv"))
+write_csv(Cleaned_survey, here::here("inputs/data/Clean_survey2.csv"))
