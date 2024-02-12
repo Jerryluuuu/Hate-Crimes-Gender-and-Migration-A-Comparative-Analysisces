@@ -1,0 +1,378 @@
+---
+title: "My title"
+subtitle: "My subtitle if needed"
+author: 
+  - Jerry Lu(Yen-Chia Lu)
+  - YuChen Chen
+  - Che-Yu Wang
+thanks: "Code and data are available at: LINK."
+date: February 13, 2024
+date-format: long
+abstract: "As the world develops, the scarcity of resources, differences in religious beliefs and political ideologies have led to increasing global turmoil and more frequent wars, resulting in a growing number of refugees. Even within countries, hate crimes against immigrants, refugees or people with different religions are on the rise. It is important and meaningful for us to analyze this trend to inform policies and initiatives aimed at solving hate crimes of racism and different religions."
+format: pdf
+number-sections: true
+bibliography: references.bib
+---
+
+```{r Workspace setup}
+#| include: false
+#| warning: false
+#| message: false
+# install.packages("readr")
+# install.packages("here")
+# install.packages("readstata13")  #  readstata13_0.9.2
+# install.packages("MASS") # MASS_7.3-51.6  
+# install.packages("sandwich")  # sandwich_2.5-1 
+# install.packages("lmtest") # lmtest_0.9-37 
+# install.packages("pBrackets") # pBrackets_1.0  
+# install.packages("dplyr") 
+# install.packages("tidyverse")
+# install.packages("list)
+# install.packages("knitr")
+# install.packages("kableExtra")
+# install.packages("tidyr")
+# install.packages("viridis")
+library(readr) # read_csv
+library(here) # here
+library(readstata13) #  readstata13_0.9.2
+library(MASS) # MASS_7.3-51.6  
+library(sandwich)  # sandwich_2.5-1 
+library(lmtest) # lmtest_0.9-37  
+library(dplyr)
+library(tidyverse)
+library(jtools)
+library(huxtable)
+library(list)
+library(knitr)
+library(kableExtra)
+library(palmerpenguins)
+library(tidyverse)
+library(janitor)
+library(lubridate)
+library(RColorBrewer)
+library(viridisLite)
+library(ggplot2)
+library(corrplot)
+library(broom)
+library(effects)
+library(coefplot)
+library(stargazer)
+library(tidyr)
+library(viridis)
+```
+
+
+# Introduction
+
+The religious composition of the United States has shifted dramatically over the last 40 years, with an increase in non-Western traditions like Buddhism, Islam, and Hinduism. Non-Christian communities are frequently subjected to violence because of their religion or as a proxy for ethnicity or other traits ( Scheitle & Hansmann, 2017). The proportion of the population that does not identify with a religion has also increased, potentially making them both the target and source of religious hostility. While some attention has been paid to issues of religious violence and persecution, the majority of this research has focused on countries other than the United States. Crimes against religious people and communities are potentially important for social scientists and policymakers to consider, especially if they appear to be motivated by prejudice against the individual's or community's religion. In the United States, these crimes are frequently referred to as hate crimes, but research on religion-related hate crimes has been limited. The purpose of this study is to provide an overview of religion-related hate crime trends and patterns using data from police reports and victim reports ( Scheitle & Hansmann, 2017). 
+However, the increasing amount of online hate material targeting immigrants has resulted in an increase in hate crimes and active hate groups in the United States. The findings show that engaging in behaviors that increase proximity to motivated offenders increases the likelihood of being exposed to anti-immigrant hatred. Factors such as perceived national identity and dissatisfaction with the country's trajectory can influence exposure to hate material directed at foreign-born people ( costello et,al, 2021) . 
+
+In Canada, which is one of the most diverse countries globally, which welcoming 437,539 permanent immigrants and 46,528 refugees over 80 countries.(2023 Annual Report to Parliament on Immigration ( government of Canada, 2022).
+
+Thus, from the above reasons and factors, we are going to compare In this study, The study "Hate Crimes and Gender Imbalances: Fears over Mate Competition and Violence Against Refugees" looks into how gender imbalances in Germany's local populations, particularly among men, influence perceptions of refugees as threats and the likelihood of violence against them. The study uses ecological analysis and individual-level survey data to investigate attitudes toward refugees, perceptions of mate competition, and support for violence. The study seeks to provide empirical evidence on the relationship between demographic imbalances and hate crimes against refugees in Germany (Dancygier et al. 2021).
+
+
+# Data {#sec-data}
+
+Source : Our paper source are using and refer the investigated results from the American Journal of Political Science and we are going to analysis the data from Germany show that hate crime rises when men face disadvantages in local mating markets. Understanding hate crime and immigrant conflict necessitates considering marriage markets and mate competition. Our survey direction will be focus on “ How do local unemployment rates and economic conditions affect native men's perceptions of mate competition, and does this increase the risk of anti-refugee attitudes and behaviors?” And also how “What effects do differences in demographic and cultural backgrounds have on the way non-immigrant German populations view refugees in terms of violence support and mate competition?”
+
+Methodology
+Our analysis will initially gathered for the 2021 paper by Dancygier with other authors  will be replicated in this effort. The survey conclude 4 different type of  "Hate Crimes and Gender" from 2016-2017 to used ecological analyses and individual-level survey data to investigate the relationship between mate competition, perceptions of refugees, and hate crime inclination. The research found that sex ratio imbalances, particularly in the 15-44 age group, could influence anti-refugee hate crime frequency. The study also used online surveys to gauge individual perceptions of mate competition induced by refugees.
+
+
+Features: 
+In our analysis, there’s 45 data variables in our survey. Our group of survey combine with both female and male in Germany with he range group by ages older then 18 years old refugees and immigrate, and we will provides graph, chart and table to represent the response type of attitude toward the refugees, and provides with Coefficient Estimates and linear regression models with some bar chart and QQ-plot. 
+
+Code : 
+Basic demographic 
+State 
+German citizen 
+Marital 
+Religion 
+Education 
+Occupation 
+Income 
+Household size 
+Subjective social status 
+Attitude toward to Refugee
+Refugee religion with islamic 
+Refugee will bring good to economics 
+Refugee in the town will increase the islamic for religion effect 
+Refugee in the town will bring challenges at local school 
+Refugee in the town will increase the competition for housing 
+Refugee in the town will change the life of people 
+Refugee in the town that will increase the local crime 
+Local wish to Alternative plan for Germany toward refugee 
+intercept refugee 
+
+
+
+```{r}
+#| label: fig-1
+#| fig-cap: Bills of penguins
+#| echo: false
+rm(list = ls())
+survey_data <- read_csv(here::here("inputs/data/Clean_survey2.csv"))
+attach(survey_data)
+SD <-
+  clean_names(survey_data) |>
+  select(ref_loc_crime,
+         ref_economy,
+         ref_loc_economy,
+         ref_loc_services,
+         ref_loc_islam,
+         age,
+         age_group,
+         gender,
+         afd_att,
+         ################
+         only_means,
+         prevent,
+         justified,
+         condemn,
+         message)
+S_data <- drop_na(SD)
+attach(S_data)
+S_data |>
+  ggplot(mapping = aes(x = ref_loc_economy, fill = age_group)) +
+  geom_bar() +
+  theme_dark()+scale_fill_viridis_d(option = "H")
+dev.off()
+
+ 
+```
+
+Talk more about it.
+
+And also planes (@fig-planes). (You can change the height and width, but don't worry about doing that until you have finished every other aspect of the paper - Quarto will try to make it look nice and the defaults usually work well once you have enough text.)
+
+```{r}
+#| label: fig-2
+#| fig-cap: Relationship between wing length and width
+#| echo: false
+#| warning: false
+#| message: false
+rm(S_data)
+S_data <- drop_na(SD)
+S_data <- data.frame(lapply(S_data, function(x) as.numeric(as.character(x))))
+lm1 <- lm(only_means ~ ref_economy + afd_att + ref_loc_crime + ref_loc_islam)
+summary(lm1)
+
+
+
+lm2 <- lm(prevent ~ ref_loc_economy + age_group + ref_economy)
+t2 <- tidy(lm2)
+kable(t2)
+ggplot(t2, aes(x = term, y = estimate)) +
+  geom_bar(stat = "identity",color = "black") +
+  theme_light() +
+  labs(x = "Term", y = "Estimate", title = "Coefficient Estimates")
+
+
+stargazer(lm1,lm2,type = "text", 
+          title = "Tabulated weights of LR models 1 through 2",
+          header = FALSE,ci = TRUE, 
+          single.row = TRUE,
+          star.cutoffs = NA, 
+          notes.append = FALSE,
+          notes = "*** p < 0.001; ** p < 0.01; * p < 0.05")
+
+dev.off()
+plot(allEffects(lm2))
+
+```
+
+
+# Results
+
+Our results are summarized in @tbl-modelresults.
+
+```{r}
+#| label: tbl-1aaa
+#| echo: false
+#| warning: false
+#| message: false
+
+survey_data <- read.csv(here::here("inputs/data/Clean_survey2.csv"))
+
+survey_waves <- survey_data[survey_data$wave == 4,]
+lm1 <- lm(only_means ~  mate_compete, data=survey_waves)
+summary(lm1)
+lm2 <- lm(only_means ~ mate_compete + job_compete + life_satisfaction, data=survey_waves)
+summary(lm2)
+lm3 <- lm(only_means ~ mate_compete + job_compete + life_satisfaction + 
+            factor(age_group) +     # age group
+            factor(gender) +     # gender 
+            factor(state) +     # state  
+            factor(citizenship) +    # german citizen
+            factor(marital) +    # marital status
+            factor(religion) +    # religious affiliation
+            eduyrs +    # education
+            factor(occupation) +    # main activity
+            factor(income) +   # income
+            factor(household_size) +   # household size
+            factor(self_econ),    # subjective social status
+          data=survey_waves)
+summary(lm3)
+lm4 <- lm(only_means ~ mate_compete + job_compete + life_satisfaction + 
+            factor(age_group) +   # age group
+            factor(gender) +   # gender 
+            factor(state) +   # state  
+            factor(citizenship) +  # german citizen
+            factor(marital) +  # marital status
+            factor(religion) +  # religious affiliation
+            eduyrs +  # education
+            factor(occupation) +  # main activity
+            factor(income) + # income
+            factor(household_size) + # household size
+            factor(self_econ) + # subjective social status
+            factor(ref_integrating) + # Refugee Index (National-level; Q73) 8 in total
+            factor(ref_citizenship) + factor(ref_reduce) + factor(ref_moredone) + factor(ref_cultgiveup) + 
+            factor(ref_economy) + factor(ref_crime) + factor(ref_terror),
+          data=survey_waves)
+summary(lm4)
+lm5 <- lm(only_means ~ mate_compete + job_compete + life_satisfaction + 
+            factor(age_group) +      # age group
+            factor(gender) +      # gender 
+            factor(state) +      # state  
+            factor(citizenship) +     # german citizen
+            factor(marital) +     # marital status
+            factor(religion) +     # religious affiliation
+            eduyrs + # education
+            factor(occupation) +     # main activity
+            factor(income) +    # income
+            factor(household_size) +    # household size
+            factor(self_econ) +    # subjective social status
+            factor(ref_integrating) + # Refugee Index (National-level; Q73) 8 in total
+            factor(ref_citizenship) + factor(ref_reduce) + factor(ref_moredone) + factor(ref_cultgiveup) + 
+            factor(ref_economy) + factor(ref_crime) + factor(ref_terror) + 
+            factor(ref_loc_services) +    # Refugee Index (Local, Q75)
+            factor(ref_loc_economy) + factor(ref_loc_crime) + factor(ref_loc_culture) + factor(ref_loc_islam) + 
+            factor(ref_loc_schools) + factor(ref_loc_housing) + factor(ref_loc_wayoflife), ## end
+          data=survey_waves)
+summary(lm5)
+# Add More Variables 
+# lrscale  Q21  Left-Right Scale
+# afd, Q23  Closeness to AfD
+# muslim_ind, afd_ind, contact_ind
+# distance_ref Q71. Distance to refugee reception centers
+# settle_ref Q72. Settlement of refugees living in area
+
+formula.5 <- 
+  as.character("only_means ~ mate_compete + job_compete + 
+               life_satisfaction +  factor(age_group) + factor(gender) + 
+               factor(state) + factor(citizenship) + factor(marital) + 
+               factor(religion) + eduyrs + factor(occupation) + 
+               factor(income) + factor(household_size) + factor(self_econ) + 
+               factor(ref_integrating) + factor(ref_citizenship) + factor(ref_reduce) + 
+               factor(ref_moredone) + factor(ref_cultgiveup) + 
+               factor(ref_economy) + factor(ref_crime) + factor(ref_terror)  + 
+               factor(ref_loc_services) +  factor(ref_loc_economy) + factor(ref_loc_crime) + 
+               factor(ref_loc_culture) + factor(ref_loc_islam) + 
+               factor(ref_loc_schools) + factor(ref_loc_housing) + factor(ref_loc_wayoflife)")
+
+formula.6 <- paste(formula.5, "factor(distance_ref) + factor(settle_ref)", 
+                   "left_right + afd + muslim_att + afd_att + contact_att", 
+                   sep="+", collapse="+")  
+lm6 <- lm(as.formula(formula.6), data=survey_waves)
+summary(lm6)
+
+table1 <- export_summs(lm1, lm2, lm3, lm4, lm5, lm6, scale = TRUE, number_format = "%.3f", coefs = c('mate competition'='mate_compete', 'job competition'='job_compete', 'life satisfaction'='life_satisfaction')) |>
+  set_escape_contents(FALSE) |>
+  add_rows(c("sociodemographics ", " ", " ", "X", "X", "X", "X"), after = 7)  |>
+  add_rows(c("national attitudes toward refugees", " ", " ", " ", "X", "X", "X"), after = 8) |>
+  add_rows(c("local attitudes toward refugees", " ", " ", " ", " ", "X", "X"), after = 9) |>
+  add_rows(c("additional controls", " ", " ", " ", " ", " ", "X"), after = 10) 
+
+table1
+
+
+```
+
+```{r}
+#| label: fig-3
+#| echo: false
+#| warning: false
+#| message: false
+
+survey_data <- read_csv(here::here("inputs/data/Clean_survey2.csv"))
+
+S_r <- survey_data[survey_data$wave == 4,]
+S_r <- select(S_r, c(only_means, message, prevent, condemn, justified))
+S_r$meansp <- ifelse(S_r$only_means >= 3, 1, 0)
+S_r$msgp <- ifelse(S_r$message >= 3, 1, 0)
+S_r$justp <- ifelse(S_r$justified >= 3, 1, 0)
+S_r$prevp <- ifelse(S_r$prevent >= 3, 1, 0)
+S_r$conp <- ifelse(S_r$condemn >= 3, 1, 0)
+
+S_response <- na.omit(S_r$meansp)
+meansp <- mean(S_response)
+msgp <- mean(S_r$msgp)
+justp <- mean(S_r$justp)
+prevp <- mean(S_r$prevp)
+conp <- mean(S_r$conp)
+
+s_r_p <- data.frame(c(meansp, msgp, justp, prevp, conp))
+s_r_p$statement <- c("Only means", "Message", "Justified", "Prevent", "Condemn")
+
+colnames(s_r_p) <- c("PB", "SM")
+
+wrapper <- function(x, ...) 
+{paste(strwrap(x, ...), collapse = "\n")}
+
+s_r_p %>% 
+  ggplot(aes(x=SM, y=PB)) +
+  geom_col(fill="green", colour="black") +
+  scale_x_discrete(limits = c("Only means", "Message", "Justified", "Prevent", "Condemn")) +
+  labs(x="Response Type") +
+  labs(y = wrapper("Proportion of respondents", width = 30)) +
+  theme_minimal() +
+  theme(text=element_text(size=12, family="serif")) +
+  ggtitle(wrapper("Between 13% and 25% of participants express agreement with statements that either endorse or fail to criticise violence towards refugees.", width =50)) +
+  theme(plot.title = element_text(face = "bold"))
+```
+
+
+
+
+
+# Discussion
+
+ Findings
+The original paper, which was written by Dancygier, Egami, Jamal, and Rischke, sought to explore the relationship between refugee sentiment and higher hate crime rates and mate competition in male-overpopulated cities. Our paper has replicated two of their major findings. 
+(1)“ How do local unemployment rates and economic conditions affect native men's perceptions of mate competition, and does this increase the risk of anti-refugee attitudes and behaviors?” 
+(2)“What effects do differences in demographic and cultural backgrounds have on the way non-immigrant German populations view refugees in terms of violence support and mate competition?”
+In this paper, we replicate their results and try to analyze and compare the correlation of influence of  perceptions of refugees as threats and the likelihood of violence against them factors with gender imbalance in different countries.
+
+
+## Weaknesses and next steps
+
+Accounting data collection Bias 
+The article investigates the impact of mate competition on anti-refugee sentiment and violence, with a particular emphasis on the gender ratio within a municipality. The research methodology assumes that having more males than females increases competition among men for female partners, which may lead to an increase in hate crimes against refugees. The data on hate crimes in Germany is based on a comprehensive collection of publicly reported attacks on refugees, which may introduce bias. The authors recognize the possibility of underreporting and the limitations of each individual source, but they use a diverse set of sources and narrowly defined categories to reduce reporting biases. They re-estimate analyses of physical attacks, which are thought to be more reliably reported than less serious incidents. Furthermore, the authors reported more accurately than less serious incidents like vandalism. The study's findings are thorough, but they should be interpreted with caution because hate crime data collection has inherent limitations, such as potential biases in reporting, classification, and the public's willingness to report incidents.
+
+#Limitations
+
+In the study of the original paper, the research brings forth valuable insights but also with limitations. One primary concern is the lack of diversity in the samples. The German populace is an abundant group of different economic standings, levels of education, and a mix of urban and rural life, and all factors that can influence a person’s perspective on refugees. Unfortunately, the study didn't fully capture this diversity. Moreover, the study may have non-respondent bias, since the survey doesn't deeply research why certain individuals did not participate or how their absence might tilt the study's conclusions. Those who chose silence could obtain contrasting opinions that remain uncounted, potentially changing the study's narrative. Additionally, the study's findings are somewhat locked into the time when the data was collected. Public opinion isn't set in stone which can ebbs and flows with the times. Because the study captures attitudes at just one point, it's tricky to say if what was true then holds up now or in the future. We'd need more data and context to see if these opinions have stuck around or shifted with the winds of change.
+
+#Ethical Implications
+
+In this paper, conducting surveys on the sensitive problem of the relationship between mate competition and the potential for violence against refugees might have the risk of inadvertently bolstering harmful stereotypes if participants perceive that their views are echoed or legitimized by the study . It might cause the precariousness of society if the study's findings make an incorrect way into the public where they could sway public opinion or inform policy decisions for refugees negatively. Moreover, the ethics of disseminating the findings should also present a significant concern. Although the original intention was to provide information and assistance on refugee policy, publishing results in a wrong way may cause hatred or give lawless elements a reason to commit violence.There is an ethical responsibility to ensure that the presentation of the findings does not inadvertently contribute to the very issues of xenophobia and violence the research aims to understand.
+
+
+\newpage
+
+\appendix
+
+# Appendix {-}
+
+
+# Additional data details
+
+
+
+
+
+
+# References
+
+
