@@ -9,7 +9,12 @@ Link to original paper: https://onlinelibrary.wiley.com/doi/10.1111/ajps.12595
 
 A replication using the SSRP was also produced at [here](https://www.socialsciencereproduction.org/reproductions/167600e3-7801-4fc5-9f3f-96bec9052d5f/index))
 
+
 ## Guide to this repo
-The `scripts` including the simulated, test, downloaded, and clean data.
-The `inputs/data` including the raw data, and clean data that will be use in the report. 
-The `outputs` contains the final report
+--The `scripts` including the simulated, test, downloaded, and clean data.
+
+--The `inputs/data` including the raw data, and clean data that will be use in the report. 
+
+--The `outputs` contains the final report.
+
+-- There are no any usage of LLMs in this report. 
