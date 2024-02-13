@@ -1,17 +1,16 @@
 ---
-title: "My title"
-subtitle: "My subtitle if needed"
+title: "Hate Crimes, Gender, and Migration: A Comparative Analysis"
 author: 
   - Jerry Lu(Yen-Chia Lu)
   - YuChen Chen
   - Che-Yu Wang
-thanks: "Code and data are available at: LINK."
+thanks: "Code and data are available at: https://github.com/Jerryluuuu/Hate-Crimes-Gender-and-Migration-A-Comparative-Analysisces.git; Replication on Social Science Reproduction platform available at: https://doi.org/10.48152/ssrp-hhs9-e285"
 date: February 13, 2024
 date-format: long
 abstract: "As the world develops, the scarcity of resources, differences in religious beliefs and political ideologies have led to increasing global turmoil and more frequent wars, resulting in a growing number of refugees. Even within countries, hate crimes against immigrants, refugees or people with different religions are on the rise. It is important and meaningful for us to analyze this trend to inform policies and initiatives aimed at solving hate crimes of racism and different religions."
 format: pdf
 number-sections: true
-bibliography: references.bib
+bibliography: references-2-2.bib
 ---
 
 ```{r Workspace setup}
@@ -61,56 +60,34 @@ library(tidyr)
 library(viridis)
 ```
 
-
 # Introduction
 
-The religious composition of the United States has shifted dramatically over the last 40 years, with an increase in non-Western traditions like Buddhism, Islam, and Hinduism. Non-Christian communities are frequently subjected to violence because of their religion or as a proxy for ethnicity or other traits ( Scheitle & Hansmann, 2017). The proportion of the population that does not identify with a religion has also increased, potentially making them both the target and source of religious hostility. While some attention has been paid to issues of religious violence and persecution, the majority of this research has focused on countries other than the United States. Crimes against religious people and communities are potentially important for social scientists and policymakers to consider, especially if they appear to be motivated by prejudice against the individual's or community's religion. In the United States, these crimes are frequently referred to as hate crimes, but research on religion-related hate crimes has been limited. The purpose of this study is to provide an overview of religion-related hate crime trends and patterns using data from police reports and victim reports ( Scheitle & Hansmann, 2017). 
-However, the increasing amount of online hate material targeting immigrants has resulted in an increase in hate crimes and active hate groups in the United States. The findings show that engaging in behaviors that increase proximity to motivated offenders increases the likelihood of being exposed to anti-immigrant hatred. Factors such as perceived national identity and dissatisfaction with the country's trajectory can influence exposure to hate material directed at foreign-born people ( costello et,al, 2021) . 
+The religious composition of the United States has shifted dramatically over the last 40 years, with an increase in non-Western traditions like Buddhism, Islam, and Hinduism. Non-Christian communities are frequently subjected to violence because of their religion or as a proxy for ethnicity or other traits [@scheitle2016religion]. The proportion of the population that does not identify with a religion has also increased, potentially making them both the target and source of religious hostility. While some attention has been paid to issues of religious violence and persecution, the majority of this research has focused on countries other than the United States. Crimes against religious people and communities are potentially important for social scientists and policymakers to consider, especially if they appear to be motivated by prejudice against the individual's or community's religion. In the United States, these crimes are frequently referred to as hate crimes, but research on religion-related hate crimes has been limited. The purpose of this study is to provide an overview of religion-related hate crime trends and patterns using data from police reports and victim reports [@scheitle2016religion]. However, the increasing amount of online hate material targeting immigrants has resulted in an increase in hate crimes and active hate groups in the United States. The findings show that engaging in behaviors that increase proximity to motivated offenders increases the likelihood of being exposed to anti-immigrant hatred. Factors such as perceived national identity and dissatisfaction with the country's trajectory can influence exposure to hate material directed at foreign-born people [@costello2021viewing].
 
-In Canada, which is one of the most diverse countries globally, which welcoming 437,539 permanent immigrants and 46,528 refugees over 80 countries.(2023 Annual Report to Parliament on Immigration ( government of Canada, 2022).
+In Canada, which is one of the most diverse countries globally, which welcoming 437,539 permanent immigrants and 46,528 refugees over 80 countries. [@government_of_canada_2023].
 
-Thus, from the above reasons and factors, we are going to compare In this study, The study "Hate Crimes and Gender Imbalances: Fears over Mate Competition and Violence Against Refugees" looks into how gender imbalances in Germany's local populations, particularly among men, influence perceptions of refugees as threats and the likelihood of violence against them. The study uses ecological analysis and individual-level survey data to investigate attitudes toward refugees, perceptions of mate competition, and support for violence. The study seeks to provide empirical evidence on the relationship between demographic imbalances and hate crimes against refugees in Germany (Dancygier et al. 2021).
-
+Thus, from the above reasons and factors, we are going to compare In this study, The study "Hate Crimes and Gender Imbalances: Fears over Mate Competition and Violence Against Refugees" looks into how gender imbalances in Germany's local populations, particularly among men, influence perceptions of refugees as threats and the likelihood of violence against them. The study uses ecological analysis and individual-level survey data to investigate attitudes toward refugees, perceptions of mate competition, and support for violence. The study seeks to provide empirical evidence on the relationship between demographic imbalances and hate crimes against refugees in Germany [@main_paper].
 
 # Data {#sec-data}
 
+We analysis the data in R (@citeR),  with an additional tools for support my analysis from `readr`[@readr], `here`[@here], `readstata13`[@readstata13], 
+`MASS`[@MASS], `sandwich`[@sandwich], `lmtest`[@lmtest], `pBrackets`[@pBrackets], `dplyr`[@dplyr], `tidyverse`[@tidyverse], `list`[@list], `knitr`[@knitr], `kableExtra`[@kableExtra], `tidyr`[@tidyr], `viridis`[@viridis]. 
+
 Source : Our paper source are using and refer the investigated results from the American Journal of Political Science and we are going to analysis the data from Germany show that hate crime rises when men face disadvantages in local mating markets. Understanding hate crime and immigrant conflict necessitates considering marriage markets and mate competition. Our survey direction will be focus on “ How do local unemployment rates and economic conditions affect native men's perceptions of mate competition, and does this increase the risk of anti-refugee attitudes and behaviors?” And also how “What effects do differences in demographic and cultural backgrounds have on the way non-immigrant German populations view refugees in terms of violence support and mate competition?”
 
-Methodology
-Our analysis will initially gathered for the 2021 paper by Dancygier with other authors  will be replicated in this effort. The survey conclude 4 different type of  "Hate Crimes and Gender" from 2016-2017 to used ecological analyses and individual-level survey data to investigate the relationship between mate competition, perceptions of refugees, and hate crime inclination. The research found that sex ratio imbalances, particularly in the 15-44 age group, could influence anti-refugee hate crime frequency. The study also used online surveys to gauge individual perceptions of mate competition induced by refugees.
+Methodology Our analysis will initially gathered for the 2021 paper by Dancygier with other authors will be replicated in this effort, and also the 2023 paper by Jayden with other authors [@Jayden2023Harmful]. The survey conclude 4 different type of "Hate Crimes and Gender" from 2016-2017 to used ecological analyses and individual-level survey data to investigate the relationship between mate competition, perceptions of refugees, and hate crime inclination. The research found that sex ratio imbalances, particularly in the 15-44 age group, could influence anti-refugee hate crime frequency. The study also used online surveys to gauge individual perceptions of mate competition induced by refugees.
 
+Features: In our analysis, there’s 45 data variables in our survey. Our group of survey combine with both female and male in Germany with he range group by ages older then 18 years old refugees and immigrate, and we will provides graph, chart and table to represent the response type of attitude toward the refugees, and provides with Coefficient Estimates and linear regression models with some bar chart and QQ-plot.
 
-Features: 
-In our analysis, there’s 45 data variables in our survey. Our group of survey combine with both female and male in Germany with he range group by ages older then 18 years old refugees and immigrate, and we will provides graph, chart and table to represent the response type of attitude toward the refugees, and provides with Coefficient Estimates and linear regression models with some bar chart and QQ-plot. 
-
-Code : 
-Basic demographic 
-State 
-German citizen 
-Marital 
-Religion 
-Education 
-Occupation 
-Income 
-Household size 
-Subjective social status 
-Attitude toward to Refugee
-Refugee religion with islamic 
-Refugee will bring good to economics 
-Refugee in the town will increase the islamic for religion effect 
-Refugee in the town will bring challenges at local school 
-Refugee in the town will increase the competition for housing 
-Refugee in the town will change the life of people 
-Refugee in the town that will increase the local crime 
-Local wish to Alternative plan for Germany toward refugee 
-intercept refugee 
-
-
+Code : [-Basic demographic]{.underline} [-State -German citizen]{.underline} [-Marital]{.underline} [-Religion]{.underline} [-Education]{.underline} [-Occupation]{.underline} [-Income]{.underline} [-Household size]{.underline} [-Subjective social status]{.underline} [-Attitude toward to Refugee]{.underline} [-Refugee religion with islamic]{.underline} [-Refugee will bring good to economics]{.underline} [-Refugee in the town will increase the islamic for religion effect]{.underline} [-Refugee in the town will bring challenges at local school]{.underline} [-Refugee in the town will increase the competition for housing]{.underline} [-Refugee in the town will change the life of people]{.underline} [-Refugee in the town that will increase the local crime]{.underline} [-Local wish to Alternative plan for Germany toward refugee]{.underline} [-intercept refugee]{.underline}
 
 ```{r}
 #| label: fig-1
-#| fig-cap: Bills of penguins
+#| fig-cap: age group vs economy 
 #| echo: false
+#| message: false
+#| warning: false
+
 rm(list = ls())
 survey_data <- read_csv(here::here("inputs/data/Clean_survey2.csv"))
 attach(survey_data)
@@ -142,16 +119,23 @@ dev.off()
  
 ```
 
-Talk more about it.
+## Results
 
-And also planes (@fig-planes). (You can change the height and width, but don't worry about doing that until you have finished every other aspect of the paper - Quarto will try to make it look nice and the defaults usually work well once you have enough text.)
+[Statement type]{.underline}:
+[Only means]{.underline} : Violence is sometimes the only way for citizens to draw German politicians' attention to the refugee problem.
+[Message]{.underline} : Sometimes we have to attack refugee homes to make politicians understand that we have a problem with refugees. 
+[Justified]{.underline}:  Hostility toward refugees is sometimes justified, even if it results in violence.
+[Prevent]{.underline}: As long as racist acts of violence keep refugees from coming to town, they can be justified.
+[Condemn]{.underline}: Politicians need to speak out against attacks on refugees more strongly. (The results were flipped for this statement, so we are now looking at people who disagree or strongly disagree.)
+
 
 ```{r}
 #| label: fig-2
-#| fig-cap: Relationship between wing length and width
+#| fig-cap: coefficient estimate
 #| echo: false
 #| warning: false
 #| message: false
+
 rm(S_data)
 S_data <- drop_na(SD)
 S_data <- data.frame(lapply(S_data, function(x) as.numeric(as.character(x))))
@@ -182,24 +166,34 @@ plot(allEffects(lm2))
 
 ```
 
+According to (@fig-2), ref_loc_economy effect plot: This plot shows the relationship between local economic perceptions regarding the benefit of refugees and the support of letting fewer numbers of refugees settle in town to prevent racist violence. The x-axis represents the levels of agreement with the benefit of refugees to the local economy, where higher values reflect more disagreement. The y-axis shows the content of agreement with the defensibility of racist violence(Prevent). This plot suggests that the more individuals perceive that refugees have no positive impact on the local economy, the more they tend to oppose the settlement of refugees in their town to prevent racist violence.
 
-# Results
+[age_group effect plot]{.underline}: This plot shows the different age groups against the levels of support for fewer numbers of refugees settling in town to prevent racist violence. Locally, two age groups of 18-29 and 30-39 appear strongly aggressive in decreasing the numbers of refugees settling in town. After these two generations, as the ages of people get older, the less people tend to oppose the settlement of refugees in their town to prevent racist violence.
 
-Our results are summarized in @tbl-modelresults.
+[ref_economy effect plot]{.underline}: Similar to the ref_loc_economy effect plot, but this one examines the perceptions of refugees' impact on the national economy (German economy). This plot also suggests that the more citizens perceive that refugees have no positive impact on the national economy, the more they tend to oppose the settlement of refugees in their country to prevent racist violence.
+
+[Afd_ind Effect Plot]{.underline}:This variable represents attitudes toward the political party. The plot shows a positive relationship between support for AfD and the tendency to support hate violence. As attitudes toward AfD become more favorable, support for hate violence increases.
+
+[Contact_ind Effect Plot]{.underline}: This variable represents the frequency of contact with refugees. The plot shows a positive relationship between contact number with refugees and the tendency to support hate violence. When people have more frequent contact with refugees, their tendency to support hate violence increase. It means contact will not let the attitude of local people for refugees become better instead even worse.
+
+[Refugee_ind Effect Plot]{.underline}: This variable represents the general attitudes toward refugees, where higher values represent more exclusionary attitudes. The plot shows a positive relationship between general attitudes toward refugees and the tendency to support hate violence. This implies that individuals with more negative views of refugees are more likely to support hate violence.
+
 
 ```{r}
 #| label: tbl-1aaa
+#| tbl-cap: linear regression model 1 to model 6
 #| echo: false
 #| warning: false
 #| message: false
+
 
 survey_data <- read.csv(here::here("inputs/data/Clean_survey2.csv"))
 
 survey_waves <- survey_data[survey_data$wave == 4,]
 lm1 <- lm(only_means ~  mate_compete, data=survey_waves)
-summary(lm1)
+#summary(lm1)
 lm2 <- lm(only_means ~ mate_compete + job_compete + life_satisfaction, data=survey_waves)
-summary(lm2)
+#summary(lm2)
 lm3 <- lm(only_means ~ mate_compete + job_compete + life_satisfaction + 
             factor(age_group) +     # age group
             factor(gender) +     # gender 
@@ -213,7 +207,7 @@ lm3 <- lm(only_means ~ mate_compete + job_compete + life_satisfaction +
             factor(household_size) +   # household size
             factor(self_econ),    # subjective social status
           data=survey_waves)
-summary(lm3)
+#summary(lm3)
 lm4 <- lm(only_means ~ mate_compete + job_compete + life_satisfaction + 
             factor(age_group) +   # age group
             factor(gender) +   # gender 
@@ -230,7 +224,7 @@ lm4 <- lm(only_means ~ mate_compete + job_compete + life_satisfaction +
             factor(ref_citizenship) + factor(ref_reduce) + factor(ref_moredone) + factor(ref_cultgiveup) + 
             factor(ref_economy) + factor(ref_crime) + factor(ref_terror),
           data=survey_waves)
-summary(lm4)
+#summary(lm4)
 lm5 <- lm(only_means ~ mate_compete + job_compete + life_satisfaction + 
             factor(age_group) +      # age group
             factor(gender) +      # gender 
@@ -250,7 +244,7 @@ lm5 <- lm(only_means ~ mate_compete + job_compete + life_satisfaction +
             factor(ref_loc_economy) + factor(ref_loc_crime) + factor(ref_loc_culture) + factor(ref_loc_islam) + 
             factor(ref_loc_schools) + factor(ref_loc_housing) + factor(ref_loc_wayoflife), ## end
           data=survey_waves)
-summary(lm5)
+#summary(lm5)
 # Add More Variables 
 # lrscale  Q21  Left-Right Scale
 # afd, Q23  Closeness to AfD
@@ -275,7 +269,7 @@ formula.6 <- paste(formula.5, "factor(distance_ref) + factor(settle_ref)",
                    "left_right + afd + muslim_att + afd_att + contact_att", 
                    sep="+", collapse="+")  
 lm6 <- lm(as.formula(formula.6), data=survey_waves)
-summary(lm6)
+#summary(lm6)
 
 table1 <- export_summs(lm1, lm2, lm3, lm4, lm5, lm6, scale = TRUE, number_format = "%.3f", coefs = c('mate competition'='mate_compete', 'job competition'='job_compete', 'life satisfaction'='life_satisfaction')) |>
   set_escape_contents(FALSE) |>
@@ -289,8 +283,12 @@ table1
 
 ```
 
+According to @tbl-1aaa, We expanded upon the regression model to elucidate the determinants of attitudes towards refugees.Our approach involved a sequential addition of variables to the baseline model, which initially considered only include mate competition, reflected by a coefficient of 0.389. Subsequent models progressively integrated job competition, sociodemographic factors, national attitudes, and local attitudes towards refugees, the impact of mate competition consistently emerged as a robust predictor, albeit with a decreasing coefficient, reaching 0.164 in Model 5. In contrast, job competition was initially significant in model 2 and model 3, diminished notably in subsequent models, manifesting a coefficient of 0.063 by Model 5.Life satisfaction was decreased further though all models and ended in a coefficient of -0.004, which indicates its relatively low influence. Therefore we have the same results with [@main_paper] by using the regression model.
+
+
 ```{r}
 #| label: fig-3
+#| fig-cap: respondents of support statement 
 #| echo: false
 #| warning: false
 #| message: false
@@ -333,46 +331,40 @@ s_r_p %>%
 ```
 
 
+According to @fig-3, survey results show respondents' attitudes toward violence against refugees. The first bar chart defines "only means". It shows that a sizable proportion of respondents see violence as merely a means to an end. The second bar, "Message," indicates that violence conveys a message and is slightly lower than the first. The third bar, "Justified," implies that violence against refugees is justified, and the majority of respondents believe this. The fourth bar, "Prevent," implies that violence can prevent specific outcomes or behaviours, but fewer respondents agree with this viewpoint. The final bar, "Condemn," represents respondents who oppose violence against refugees, with the lowest percentage agreeing with this position. The graph depicts a range of attitudes toward violence against refugees, with some seeing it as justifiable or a means to an end, while a smaller proportion condemns it completely [@main_paper].
 
 
+According to the findings, there is little difference between these five statement types, with 13% to 25% of respondents agreeing with statements supporting or not condemning violence against refugees. However, 13% of people will select the answer "Prevent," which means Racist violence is acceptable as long as it prevents refugees from entering town. However, the highest choice of "condemn" with more than 25% of respondents indicates that they disagree with the attack on the refugee, and many believe that politicians should denounce attacks on refugees more forcefully. Furthermore, from the first three statement types, we can see that more than 17% and less than 20% of people are in the aggressive way toward the refugee that they believe Violence is sometimes the only way for citizens to draw German politicians' attention to the refugee situation. We sometimes have to attack refugee homes to persuade politicians that there is a problem with refugees. Hostility towards refugees is sometimes justified, even if it results in violence.
 
-# Discussion
+## Discussion
 
- Findings
+Discussion 1: Comparison of hate crime rate of Statistic of Canada 
+According to the statistic of Canada However the hate crimes rooted in race and ethnicity saw a 6% increase in 2021, reaching 1,723 incidents, following an 83% surge in 2020 with 1,619 cases.Among these, the number of incidents targeting Black individuals was the most numerous,followed by east and southeast Asians, Arab or West Asian,South Asian, and the lowest number of victims being South Asian individuals. Based on the report, it is noticeable that the hate crime rate was decreasing for Black and Indigenous people, and especially for White people, at -5%, -1%, and -38% respectively. However, the crime rates for other races were all increasing at different levels [@moreau_2021]. These statistics and increasing percentage of hate crimes rooted in race and ethnicity pose a potential and visceral threat to a large proportion of permanent immigrants and refugees in Canada [@moreau_2021]. 
+
+From ancient times to the present, racial problems have consistently caused conflicts.However, the increase in hate crimes in Canada has been attributed to a range of factors, with the Covid-9 playing a significant role in recent years. Statistics Canada has witnessed a 72% jump in its hate crime rate between 2019 and 2021. The pandemic not only disrupted the sense of normalcy and safety for many but also intensified existing fears and prejudices. This has led to increased incidents of xenophobia. The situation was further exacerbated by social and economic instability, which often led to increased animosity towards minorities and immigrant groups [@Shreya_2022].
+
+Discussion 2 : The religion and Immigration hate crime issues 
+On the study of “ Viewing anti-immigrant hate online: An application of routine activity and Social Structure-Social Learning Theory by Matthew Costello, Salvatore J. Restifo, James Hawdon. The study examined the factors that influence exposure to anti-immigrant hate online in 726 internet users aged 15 to 36. The findings indicated that using platforms such as Facebook, YouTube, Reddit, and Snapchat increased the likelihood of encountering hate. Voting on political issues online doubled the likelihood of exposure [@costello2021viewing]. However, the theory found little evidence to support the idea that socio-demographic characteristics influence exposure to hate. Politically conservative individuals were less likely to come across such content. A strong American identity and dissatisfaction with the country's direction significantly increased the likelihood of encountering hatred online. When accounting for American identity and dissatisfaction with the country's direction, there was a significant negative relationship between economic engagement and viewing hate. These findings highlight the complex interplay between online behaviour, sociopolitical attitudes, and exposure to online hate. Understanding how the digital environment facilitates hate exposure, as well as the significant influence of individual attitudes and behaviours, is critical [@costello2021viewing]. 
+On the other article “ Religion-Related Hate Crimes: Data, Trends, and Limitations”, The article examines the Uniform Crime Report (UCR) and the National Crime Victimization Survey (NCVS) as sources of information on religious hate crimes in the United States. The UCR shows a decrease in hate crimes, including those motivated by religious bias, whereas the NCVS, based on victim reports, indicates a relatively stable number of such crimes. In 2012, 5,790 hate crimes were reported, with 1,099 classified as religiously motivated, accounting for 18% to 20% of all hate crimes [@scheitle2016religion]. The majority of these hate crimes were anti-Jewish, with a notable increase in anti-Islamic hate crimes following the terrorist attacks on September 11, 2001. In 2012, the NCVS reported approximately 530,000 total hate crimes, with religion-related bias accounting for roughly 0.2% of all incidents, or 65,000 crimes. This disparity indicates underreporting in the UCR due to factors such as victims' reluctance to report such crimes and difficulties in law enforcement's classification of bias-motivated crimes. The study emphasizes the difficulty of tracking and understanding religion-related hate crimes in the United States, emphasizing the need for better reporting mechanisms and increased awareness of the impact of religious bias on victims [@scheitle2016religion]. 
+
+## Findings
 The original paper, which was written by Dancygier, Egami, Jamal, and Rischke, sought to explore the relationship between refugee sentiment and higher hate crime rates and mate competition in male-overpopulated cities. Our paper has replicated two of their major findings. 
 (1)“ How do local unemployment rates and economic conditions affect native men's perceptions of mate competition, and does this increase the risk of anti-refugee attitudes and behaviors?” 
 (2)“What effects do differences in demographic and cultural backgrounds have on the way non-immigrant German populations view refugees in terms of violence support and mate competition?”
 In this paper, we replicate their results and try to analyze and compare the correlation of influence of  perceptions of refugees as threats and the likelihood of violence against them factors with gender imbalance in different countries.
 
+##Accounting data collection Bias 
 
-## Weaknesses and next steps
-
-Accounting data collection Bias 
 The article investigates the impact of mate competition on anti-refugee sentiment and violence, with a particular emphasis on the gender ratio within a municipality. The research methodology assumes that having more males than females increases competition among men for female partners, which may lead to an increase in hate crimes against refugees. The data on hate crimes in Germany is based on a comprehensive collection of publicly reported attacks on refugees, which may introduce bias. The authors recognize the possibility of underreporting and the limitations of each individual source, but they use a diverse set of sources and narrowly defined categories to reduce reporting biases. They re-estimate analyses of physical attacks, which are thought to be more reliably reported than less serious incidents. Furthermore, the authors reported more accurately than less serious incidents like vandalism. The study's findings are thorough, but they should be interpreted with caution because hate crime data collection has inherent limitations, such as potential biases in reporting, classification, and the public's willingness to report incidents.
 
-#Limitations
+## Limitations
 
 In the study of the original paper, the research brings forth valuable insights but also with limitations. One primary concern is the lack of diversity in the samples. The German populace is an abundant group of different economic standings, levels of education, and a mix of urban and rural life, and all factors that can influence a person’s perspective on refugees. Unfortunately, the study didn't fully capture this diversity. Moreover, the study may have non-respondent bias, since the survey doesn't deeply research why certain individuals did not participate or how their absence might tilt the study's conclusions. Those who chose silence could obtain contrasting opinions that remain uncounted, potentially changing the study's narrative. Additionally, the study's findings are somewhat locked into the time when the data was collected. Public opinion isn't set in stone which can ebbs and flows with the times. Because the study captures attitudes at just one point, it's tricky to say if what was true then holds up now or in the future. We'd need more data and context to see if these opinions have stuck around or shifted with the winds of change.
 
-#Ethical Implications
+## Ethical Implications
 
 In this paper, conducting surveys on the sensitive problem of the relationship between mate competition and the potential for violence against refugees might have the risk of inadvertently bolstering harmful stereotypes if participants perceive that their views are echoed or legitimized by the study . It might cause the precariousness of society if the study's findings make an incorrect way into the public where they could sway public opinion or inform policy decisions for refugees negatively. Moreover, the ethics of disseminating the findings should also present a significant concern. Although the original intention was to provide information and assistance on refugee policy, publishing results in a wrong way may cause hatred or give lawless elements a reason to commit violence.There is an ethical responsibility to ensure that the presentation of the findings does not inadvertently contribute to the very issues of xenophobia and violence the research aims to understand.
 
-
 \newpage
 
-\appendix
-
-# Appendix {-}
-
-
-# Additional data details
-
-
-
-
-
-
 # References
-
-
